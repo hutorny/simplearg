@@ -40,7 +40,7 @@ struct Test {
         print(std::cout << "Usage:\n", params);
         return true;
     }
-    static constexpr simplearg::Parameters<Test, 6> params = {{
+    static constexpr simplearg::Parameters<Test, 7> params = {{
         {&Test::option, "--option=", "a parameter with one option", "" },
         {&Test::foo, "foo", "a foo parameter", "f"},
         {&Test::bar, "bar", "a bar parameter", "b ba bbar"},
