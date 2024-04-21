@@ -33,6 +33,10 @@ struct Test {
         return true;
     }
     bool help(std::string_view name, Arguments&) {
+        std::cout << "Got: " << name << '\n';
+        return true;
+    }
+    bool any(std::string_view name, Arguments&) {
         print(std::cout << "Usage:\n", params);
         return true;
     }
@@ -43,6 +47,7 @@ struct Test {
         {&Test::dash, "-", "a dash parameter", "" },
         {&Test::ddsh, "--", "a double dash parameter", "" },
         {&Test::help, "help", "prints this help", "--help -h -?" },
+        {&Test::any, "", "any positional argument", "" },
     }};
 };
 

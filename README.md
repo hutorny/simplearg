@@ -5,7 +5,7 @@
 
 SimpleArg is a header-only library for dispatching argc, argv to a user's class. 
 It does not impose any constraints on how the arguments may look like - with a double dash, a single dash, 
-or no dash at all. The only assumption it makes is about `=` character, which is treated as an option/value delimiter, if such option syntax is used in the application.
+or no dash at all. The only assumption it makes is about `=` character, which is treated as an option/value delimiter, if such option syntax is used in the application. It also provides a simple solution for parsing configuration data by breaking the data it into a vector of arguments with `str2argv` function 
 
 ## Quick Start Guide
 
@@ -81,6 +81,9 @@ static constexpr simplearg::Parameters<OptionDispatcher, 3> myparams = {{
     { &OptionDispatcher::help, "help", "prints this help", "--help -h -?" },
 }};
 ```
+
+* **Note :** dispatcher with an empty option name will be used as a fallback and called for all arguments, 
+  not matched with any other option
 
 #### 3. Parse arguments:
 

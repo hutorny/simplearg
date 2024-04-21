@@ -38,7 +38,7 @@ public:
     constexpr auto description() const noexcept { return description_; }
     constexpr auto aliases() const noexcept { return aliases_; }
     constexpr auto dispatcher() const noexcept { return dispatcher_; }
-    constexpr operator bool() const noexcept { return !(name_ == nullptr || name_[0] == '\0' || dispatcher_ == nullptr); }
+    constexpr operator bool() const noexcept { return !(name_ == nullptr || dispatcher_ == nullptr); }
 private:
     dispatcher_type dispatcher_;
     const char* name_;
@@ -137,12 +137,14 @@ public:
                 if (!alias.empty()) dispatchers[alias] = p.dispatcher();
             });
         }
+        auto posarg = dispatchers.find("");
         for(std::string_view param = get(); count_ >= 0 && ! param.empty(); param = get()) {
             const auto eq = param.find('=');
             if (eq != param.npos) {
                 param = param.substr(0, eq + 1);
             }
             auto p = dispatchers.find(param);
+            if (p == dispatchers.end()) p = posarg;
             if (p == dispatchers.end()) {
                 message("Unknown verb '", param, "' expected one of:");
                 for(auto p : params) message(' ', p.name());
