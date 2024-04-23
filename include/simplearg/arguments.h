@@ -79,6 +79,7 @@ public:
         values_++;
         return true;
     }
+#if defined(__cpp_lib_to_chars) && (__cpp_lib_to_chars >= 201611L)
     bool get(double& value) {
         if (count_ <= 0) return false;
         const char* end = *values_ + std::strlen(*values_);
@@ -95,6 +96,7 @@ public:
         values_++;
         return true;
     }
+#endif
     bool get(std::string& value) {
         if (count_ <= 0) return false;
         value = *values_++;
